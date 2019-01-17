@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+		<ResponsivePopover id='inctureMDComments' 
+		placement="Top" 
+		
+		contentWidth='20rem' contentHeight='20rem'>
+		<content>
+			<List items='{oCommentsModel>/notifications}' class="inctureMDNotificationClass">
+				<items>
+					<NotificationListItem
+						description='{oCommentsModel>msg}'
+						datetime='{oCommentsModel>commentor}'
+						showButtons ='false'
+						showCloseButton= 'false'
+						 />
+				</items>
+			</List>
+				<FeedInput id= "feedInputId"
+		post="onPost" maxLength='200'
+		enabled="{oCommentsModel>/enableFlag}" 
+		showIcon="false"
+		class="sapUiSmallMarginTopBottom" /> 
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

@@ -1,0 +1,99 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:l="sap.ui.layout"
+	controllerName="com.incture.controller.Master" xmlns:html="http://www.w3.org/1999/xhtml">
+	
+	<!--  
+		This page contains the master list. It contains the following modules.
+		1. User section: Picture and text. Visible only on small screens and hidden on bigger screens.
+		2. The Master Section.
+			2.1. VBox: Holds all the panels.
+			2.2 Panels.: They hold the lists. Based on list items, we make the panels expandable or static.
+			2.3 The Lists contains the list items.
+		3. The MasterList data is coming from init_data.json file and default model.	
+	
+	 -->
+	<Page title="Master" class="incMasterPage" showHeader="false">
+		<content>
+		
+			<l:Grid span='S12' vSpacing='0'>
+				<VBox>
+					<Image src="./images/placeholder.png"
+						class="incMRoundBorderRadiusClass inctureMDMargin0_5remClass"
+						width="4rem" height="4rem">
+					</Image>
+					<layoutData>
+						<l:GridData spanS='12' visibleL='false' visibleXL='false'
+							visibleM='false' visibleS='true'>
+
+						</l:GridData>
+					</layoutData>
+				</VBox>
+				<StandardListItem title='name'
+					description='Description' class='inctureMDUserDetailsClass'>
+					<layoutData>
+						<l:GridData spanS='12' visibleL='false' visibleXL='false'
+							visibleM='false' visibleS='true'>
+
+						</l:GridData>
+					</layoutData>
+				</StandardListItem>
+			</l:Grid>
+			<VBox id='inctureMDMasterVBox' class='inctureMDMasterVBoxClass'
+				items='{SidePanelModel>/roleMappingDto}'>
+				
+				<items>
+					<Panel class='inctureMDMasterPanelClass' backgroundDesign='Transparent'
+						expanded='false' expandable='true'>
+						<headerToolbar>
+							<Toolbar id='inctureMDMasterPanel'>
+							
+								<content>
+								
+									<HBox width='2rem' class='InctureMDLMargin1remClass'>
+										<core:Icon height='1rem' src="{SidePanelModel>icon}" />
+										
+									</HBox>
+									<HBox width='80%' justifyContent='SpaceBetween' >
+										<Title text='{SidePanelModel>name}' class="" />
+										 <Text
+											text='{path:"SidePanelModel>listRole", formatter:"com.incture.util.formatter.fnMD_DisplayChildCount"}' 
+											textAlign='Center' class="" />
+									</HBox>
+									<HBox width='1rem'></HBox>
+									
+									
+								</content>
+							</Toolbar>
+						</headerToolbar>
+						<content>
+							<List items='{SidePanelModel>listRole}' class='inctureMDMasterListClass'
+								mode="SingleSelectMaster"
+								showNoData='false' select='onItemPress'>
+								
+								<items>
+									<CustomListItem type='Active' height='2.5rem'
+										class='inctureMDMasterListItemClass'>
+										<!-- <HBox width='4.5rem' displayInline='true'> </HBox> -->
+										<HBox displayInline='true' height='2.5rem' alignItems="Center"
+											class='InctureMDLMargin4remClass'>
+											<Text text='{SidePanelModel>name}' height='2.5rem' />
+											
+										</HBox>
+										
+										
+									</CustomListItem>
+								</items>
+								
+							</List>
+							
+						</content>
+					</Panel>
+					
+				</items>
+			</VBox>
+			<HBox>
+			<Button id="idDownload" icon="sap-icon://download" visible="false" type="Transparent" text="Download Allocations" press="onDownloadAllocations" class="downloadButtonClass sapUiSmallMarginBegin"/>
+			</HBox>
+		</content>
+	</Page>
+</core:View>

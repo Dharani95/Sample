@@ -1,0 +1,196 @@
+<core:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f.semantic"
+	class="sapUiSizeCompact" controllerName="com.incture.controller.Approval"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Title" showHeader="false">
+		<content>
+			<VBox class="salesReportHdrBoxClass">
+				<Toolbar height="3rem">
+					<Title text="{i18n>ProjectDet}" level="H3" titleStyle="H3"
+						class="sapUiTinyMarginBegin" />
+				</Toolbar>
+				<l:Grid defaultSpan="L6 M6 S12" class="detailGridClass">
+					<HBox class="sapUiTinyMarginBegin">
+						<Label text="{i18n>ProjectName}" class="gridLblClass" />
+						<Text id="idApprvProjectName" text="{ApprovalModel>/projectName}"
+							class="approvalHdrTextMargin" />
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+					</HBox>
+					<HBox>
+						<Label text="{i18n>ProjectCode}" class="gridLblClass sapUiLargeMarginBegin" />
+						<Text id="idApprvProjectCode" class="approvalHdrTextMargin"
+							text="{ApprovalModel>/projectCode}" />
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+					</HBox>
+					<HBox id="projectStartDateHBox" class="sapUiTinyMarginBegin sapUiTinyMarginBottom">
+						<Label text="Start Date:" class="gridLblClass" />
+						<Text id="idApprvStartDate" class="approvalHdrTextMargin"
+							text="{path:'ApprovalModel>/projStartDate', formatter:'com.incture.util.formatter.formatDate'}" />
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+					</HBox>
+					<HBox id="projectEndDateHBox">
+						<Label text="End Date:" class="gridLblClass sapUiLargeMarginBegin" />
+						<Text id="idApprvSEndDate" class="approvalHdrTextMargin"
+							text="{path:'ApprovalModel>/projEndDate', formatter:'com.incture.util.formatter.formatDate'}" />
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+					</HBox>
+				</l:Grid>
+			</VBox>
+			
+			<Button type="Default" text="View Requested RLS" press="onRlsDisplay"
+					id="idRlsDisplayButton" class="rlsButtonClass sapUiSmallMarginBegin" >
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+			
+			<VBox class="salesReportHdrBoxClass">
+				<Table id="idResourceTbl" mode="SingleSelectMaster"
+					items="{path:'ApprovalModelList>/allocationDto',
+							sorter: {
+								path: 'primarySkills',
+								descending: true,
+								group: true
+							}
+						}"
+					class="materialTblClass">
+					<headerToolbar>
+						<Toolbar >
+							<Title text="Allocated Resources" level="H3" titleStyle="H3" />
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+<!-- 					 added width explicitly for each column. -->
+						<Column width="6%">
+							<Text text="Emp Id" class="matTblHdrClass" />
+						</Column>
+						<Column width="6%">
+							<Text text="Emp Name" class="matTblHdrClass" />
+						</Column>
+						<Column   demandPopin="true" width="6%">
+							<Text text="{i18n>EmailId}" class="matTblHdrClass" />
+						</Column>
+<!-- 						<Column   demandPopin="true"> -->
+<!-- 							<Text text="{i18n>Designation}" class="matTblHdrClass" /> -->
+<!-- 						</Column> -->
+						<Column   demandPopin="true" width="6%">
+							<Text text="{i18n>SubGrade}" class="matTblHdrClass" />
+						</Column>
+						<Column   demandPopin="true" width="9%">
+							<Text text="{i18n>PrimarySkills}" class="matTblHdrClass" />
+						</Column>
+<!-- 						<Column   demandPopin="true"> -->
+<!-- 							<Text text="{i18n>SecndSkills}" class="matTblHdrClass" /> -->
+<!-- 						</Column> -->
+						<Column   demandPopin="true">
+							<Text text="Bill %" class="matTblHdrClass" />
+						</Column>
+						<Column   demandPopin="true">
+							<Text text="Util %" class="matTblHdrClass" />
+						</Column>
+						<Column   demandPopin="true">
+							<Text text="BU" class="matTblHdrClass" />
+						</Column>
+						<Column   demandPopin="true">
+							<Text text="Alloc %" class="matTblHdrClass" />
+						</Column>
+						<Column   demandPopin="true" width="6%">
+							<Text text="Alloc From" class="matTblHdrClass" />
+						</Column>
+						<Column   demandPopin="true">
+							<Text text="Alloc To" class="matTblHdrClass" />
+						</Column>
+						<Column   demandPopin="true" width="10%">
+							<Text text="Offshore/Onsite" class="matTblHdrClass" />
+						</Column>
+						<Column   demandPopin="true" width="10%">
+							<Text text="People Manager" class="matTblHdrClass" />
+						</Column>
+<!-- 						<Column   demandPopin="true"> -->
+<!-- 							<Text text="Delivery Manager" class="matTblHdrClass" /> -->
+<!-- 						</Column> -->
+						<Column   demandPopin="true" width="9%">
+							<Text text="Reason" class="matTblHdrClass" />
+						</Column>
+						<Column   demandPopin="true" width="10%">
+							<Text text="" class="matTblHdrClass" />
+						</Column>
+						
+					</columns>
+					<items>
+						<ColumnListItem ><!--  visible="{parts:['ApprovalModelList>allocationType','ApprovalModel>taskName'], formatter:'.disableFormatter'}"  -->
+							<cells>
+								<Text text="{ApprovalModelList>empId}" enabled="true"
+									editable="false" />
+								<Text text="{ApprovalModelList>empName}" enabled="true"
+									editable="false" />
+								<Text text="{ApprovalModelList>emailId}" enabled="true"
+									editable="false" wrapping="true"/>
+<!-- 								<Text text="{ApprovalModelList>designation}" enabled="true" -->
+<!-- 									editable="false" wrapping="true"/> -->
+								<!-- <Text text="{ApprovalModelList>subGrade}" /> -->
+								<ObjectNumber number="{ApprovalModelList>subGrade}"
+									state="{path:'ApprovalModelList>allocationType', formatter:'.stateFormatter'}" />
+
+								<Text text="{ApprovalModelList>primarySkills}" enabled="true"
+									editable="false" wrapping="true"/>
+<!-- 								<Text text="{ApprovalModelList>secondarySkills}" -->
+<!-- 									enabled="true" editable="false" wrapping="true" /> -->
+								<Text text="{ApprovalModelList>billPercent}"
+									enabled="true" editable="false" wrapping="true" />
+									<Text text="{ApprovalModelList>utilizationPercent}"
+									enabled="true" editable="false" wrapping="true" />
+									<Text text="{ApprovalModelList>businessUnit}"
+									enabled="true" editable="false" wrapping="true" />	
+								<Text text="{ApprovalModelList>billPercent}" enabled="true"
+									editable="false" wrapping="true"/>
+								<Text
+									text="{path:'ApprovalModelList>actualStartDate', formatter: 'com.incture.util.formatter.formatDate'}"
+									enabled="true" editable="false" wrapping="true"/>
+								<Text
+									text="{path:'ApprovalModelList>rollOffDate', formatter:'com.incture.util.formatter.formatDate'}"
+									enabled="true" editable="false" wrapping="true"/>
+								<Text text="{ApprovalModelList>offshore}" enabled="true"
+									editable="false" wrapping="true"/>
+								<Text text="{ApprovalModelList>peopleManagerName}" enabled="true"
+									editable="false" wrapping="true"/>
+								 <Button  icon="sap-icon://message-popup" press="onMessageAddition" 
+					              class="sapUiTinyMarginBegin" id="idRejectionPush" visible="true"/> 
+					<!-- Addiiton for Message Popover -->
+								<VBox>
+									<RadioButtonGroup id="idRadioGroup" select="onApprovalPush" selectedIndex="{ApprovalModelList>selectedIndex}"  enabled="{parts:['ApprovalModelList>allocationType','ApprovalModelList>rmApproval','ApprovalModelList>dmApproval'], formatter:'.disableFormatter'}" >
+										<buttons >
+											<RadioButton  text="Approve" id="idApprove" />
+											<RadioButton  text="Reject" id="idReject" />
+										</buttons>
+									</RadioButtonGroup>
+								</VBox>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</content>
+		<footer>
+			<OverflowToolbar id="rmInputFooter">
+				<ToolbarSpacer />
+				<Button type="Accept" text="Submit" press="onApproveReject"
+					id="idButtonApprove" class="sapUiSmallMarginEnd">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

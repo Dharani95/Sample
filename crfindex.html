@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+		<script src="/sapui5/resources/sap-ui-cachebuster/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-libs="sap.m"
+				data-sap-ui-xx-bindingSyntax="complex"
+				data-sap-ui-theme="sap_belize"
+				data-sap-ui-resourceroots='{
+					"com.incture":"./"
+				}'
+				data-sap-ui-appcachebuster="./">
+		</script>
+		<!-- only load the mobile lib "sap.m" and the "sap_bluecrystal" theme -->
+
+		<script >
+			var oResource = {};
+			oResource.url = "./";
+			oResource.final = true;
+			jQuery.sap.registerModulePath("com.incture", oResource);
+				var app = new sap.m.App({initialPage:"idCrfApproval"});
+				var page = sap.ui.view({id:"idCrfApproval", viewName:"com.incture.view.crfApproval", type:sap.ui.core.mvc.ViewType.XML});
+				app.addPage(page);
+				
+				app.placeAt("content");
+		</script>
+		
+<!-- 		<script type="text/javascript" src="util/formatter.js"></script>  -->
+<!-- 		<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script> -->
+		
+		
+		
+<!-- 		<script src="util/formatter.js"></script> -->
+<!-- 		<script src="i18n/i18n.properties"></script> -->
+<!-- 		<script src="css/fonts/Style.css"></script> -->
+		<link rel="stylesheet" type="text/css" href="css/Style.css"> 
+		<script>
+	
+		  
+		
+// 		sap.ui.getCore().attachInit(function () {
+// 			var oResource = {};
+// 			oResource.url = "./";
+// 			oResource.final = true;
+// 			jQuery.sap.registerModulePath("com.incture", oResource);
+// 			sap.ui.core.AppCacheBuster.register(oResource.url);
+// 			new sap.ui.core.ComponentContainer({
+// 				name : 'com.incture' 
+// 			}).placeAt('content')
+		//});
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>

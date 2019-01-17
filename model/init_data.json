@@ -1,0 +1,257 @@
+{
+"masterList": [
+			{
+			"name":"Dashboard",
+			"key":"Dashboard",
+			"icon":"sap-icon://fa/tachometer"
+			
+		},
+		{
+			"name":"Inbox",
+			"key":"Inbox",
+			"icon":"sap-icon://fa/tachometer",
+			"subItems": [
+						 {
+						 	"name": "Inbox",
+						 	"key": "Inbox"
+						 }
+			]
+		},
+		{
+			"name":"Project Management",
+			"key":"PM",
+			"icon":"sap-icon://fa/user",
+			"subItems": [
+						 {
+						 	"name": "Assign Resources",
+						 	"key": "assignResources"
+						 },
+						 {
+						 	"name": "Change Request Form",
+						 	"key": "ChangeRequestForm"
+						 }
+			]
+			
+		},
+			{
+			"name":"Resource Management",
+			"key":"events",
+			"icon":"sap-icon://fa/tachometer",
+			"subItems":[
+						{
+							"name":"Update Resource Allocation Master",
+							"key":"updateResMgmtTable"
+						}
+			]
+		}
+
+		
+	],
+	
+	"searchSuggestList":[
+		{
+			"desc":"Amazon",
+			"key":"Amazon"
+			
+		},
+		{
+			"desc":"Snapdeal",
+			"key":"Snapdeal"
+			
+		},
+		{
+			"desc":"E-Bay",
+			"key":"Eaby"
+			
+		},
+		{
+			"desc":"Myntra",
+			"key":"Mynta"
+			
+		},
+		{
+			"desc":"Shopeclues",
+			"key":"Shopclues"
+			
+		},
+		{
+			"desc":"Groffers",
+			"key":"Groffers"
+			
+		},
+		{
+			"desc":"Big Basket",
+			"key":"BigBasket"
+			
+		}
+		
+	],
+	"resourceMgmt":[
+		{
+			"name":"Arun",
+			
+			"subGrade":"G1.1",
+			"locn":"Bangalore",
+			"onshoreOff":"onShore",
+			"projManagerName":"Abhay",
+			"projCode":"TSCM",
+			"softLockStDate":"12/3/2017",
+			"softLockEndDate":"12/4/2017",
+			
+			"stDate":"12/3/2017",
+			"endDate":"11/4/2017",
+			"bill":"50%",
+			"util":"100%",
+			"allocStatus":"Allocated"
+		
+			
+			
+		},
+		{
+			"name":"Arun",
+
+			"subGrade":"G1.1",
+			"locn":"Bangalore",
+			"onshoreOff":"onShore",
+			"projManagerName":"Abhay",
+			"projCode":"TSCM",
+			"softLockStDate":"12/3/2017",
+			"softLockEndDate":"12/4/2017",
+			
+			"stDate":"12/3/2017",
+			"endDate":"11/4/2017",
+			"bill":"50%",
+			"util":"100%",
+			"allocStatus":"Allocated"
+	
+			
+		},
+		{
+			"name":"Arun",
+			
+			"subGrade":"G1.1",
+			"locn":"Bangalore",
+			"onshoreOff":"onShore",
+			"projManagerName":"Abhay",
+			"projCode":"TSCM",
+			"softLockStDate":"12/3/2017",
+			"softLockEndDate":"12/4/2017",
+			
+			"stDate":"12/3/2017",
+			"endDate":"11/4/2017",
+			"bill":"50%",
+			"util":"100%",
+			"allocStatus":"Allocated"
+			
+		},
+		{
+			"name":"Arun",
+			
+			"subGrade":"G1.1",
+			"locn":"Bangalore",
+			"onshoreOff":"onShore",
+			"projManagerName":"Abhay",
+			"projCode":"TSCM",
+			"softLockStDate":"12/3/2017",
+			"softLockEndDate":"12/4/2017",
+			
+			"stDate":"12/3/2017",
+			"endDate":"11/4/2017",
+			"bill":"50%",
+			"util":"100%",
+			"allocStatus":"Allocated"
+			
+		},
+		{
+			"name":"Arun",
+	
+			"subGrade":"G1.1",
+			"locn":"Bangalore",
+			"onshoreOff":"onShore",
+			"projManagerName":"Abhay",
+			"projCode":"TSCM",
+			"softLockStDate":"12/3/2017",
+			"softLockEndDate":"12/4/2017",
+			
+			"stDate":"12/3/2017",
+			"endDate":"11/4/2017",
+			"bill":"50%",
+			"util":"100%",
+			"allocStatus":"Allocated"
+			
+		},
+		{
+			"name":"Arun",
+		
+			"subGrade":"G1.1",
+			"locn":"Bangalore",
+			"onshoreOff":"onShore",
+			"projManagerName":"Abhay",
+			"projCode":"TSCM",
+			"softLockStDate":"12/3/2017",
+			"softLockEndDate":"12/4/2017",
+			
+			"stDate":"12/3/2017",
+			"endDate":"11/4/2017",
+			"bill":"50%",
+			"util":"100%",
+			"allocStatus":"Allocated"
+			
+		},
+		{
+			"name":"Arun",
+			
+			"subGrade":"G1.1",
+			"locn":"Bangalore",
+			"onshoreOff":"onShore",
+			"projManagerName":"Abhay",
+			"projCode":"TSCM",
+			"softLockStDate":"12/3/2017",
+			"softLockEndDate":"12/4/2017",
+			
+			"stDate":"12/3/2017",
+			"endDate":"11/4/2017",
+			"bill":"50%",
+			"util":"100%",
+			"allocStatus":"Allocated"
+		}
+		
+	],
+	"notifications": [{
+		"msg" :"You have received $1000. Total balance is $1000",
+		"date":"21 May 2017 12:33",
+		"icon":"sap-icon://fa/creditCard"
+	},
+	{
+		"msg" :"Aresnal has won the FA cup beating Chelase 3-0",
+		"date":"20 May 2017 01:00s",
+		"icon":"sap-icon://fa/trophy"
+	}
+	],
+	
+	"ProjectClientLoc" : [
+		{
+			"Name": "Off Shore",
+			"Key": "OffShore"
+		},	
+		{
+			"Name": "On Site",
+			"Key": "OnSite"
+		}
+	],
+	
+	"ProjectDetails" : {
+			"ProjectName": "",
+			"ProjectNameValState": "None",
+			"ProjectId": "",
+			"ProjectStrtDate" : "",
+			"ProjectStrtDateValState" : "None",
+			"ProjectEndDate" : "",
+			"ProjectEndDateValState" : "None",
+			"RlsUploader": "",
+			"RlsUploaderValState": "None"
+	}
+	
+	
+
+}

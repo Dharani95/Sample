@@ -1,0 +1,273 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="com.incture.controller.CRF" xmlns:u = 'sap.uxap' xmlns:l="sap.ui.layout" xmlns:t = "sap.ui.table"
+	xmlns:html="http://www.w3.org/1999/xhtml" class="sapUiSizeCompact">
+	<Page title = "{i18n>CHANGE_REQ_FORM}" showHeader="true" showNavButton = "true" class="simplePageClass" navButtonPress = "onNavButtonPress">
+		
+		<content>
+						
+			<VBox class="salesReportHdrBoxClass">
+					<Bar class = "toobarClass2 barClass">
+					<contentLeft>
+					<Label text ='{i18n>SEARCH_PARAMETERS}' design = "Bold"    class="labelClss sapUiSmallMarginBegin"/>
+					</contentLeft>
+						<contentRight>
+							<Button text = "{i18n>SEARCH}"
+								class = "inctureDialogBtn sapUiSizeCompact sapUiSmallMarginBegin "
+								press = "onSearch" type="Emphasized" />
+							
+							<Button text= "{i18n>CLEAR}" press ="onClear" class="sapUiSmallMarginEnd" type="Reject" />
+						</contentRight>
+					</Bar>
+					<l:Grid defaultSpan="L6 M6 S12" class="detailGridClass">
+						<HBox>
+						<Label text="{i18n>ACCOUNT_NAME}:" required="true" class="crfLabelClass" />
+						<Select	 id="idAccountName"  items="{accountNameModel>/idAndNameDto}" change="onAccountNameChange" selectedKey="{crfModel>/AccountName}"
+							   forceSelection="false" width="206px" class="sapUiSizeCompact crfSelectClass" > 
+							<core:ListItem text="{accountNameModel>name}" key="{accountNameModel>name}" />
+						</Select>
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+					</HBox>
+					<HBox>
+						<Label text="{i18n>ProjectCode}" required="true" class="crfLabelClass" />
+						<Select	 id="idProjectCode"  selectedKey="{crfModel>/ProjectCode}" 
+								items="{ProjectCodeModel>/idAndNameDto}" change="onProjectCodeChange"
+							 forceSelection="false" width="206px" class="sapUiSizeCompact crfSelectClass" enabled="false">
+							<core:ListItem text="{ProjectCodeModel>name}-{ProjectCodeModel>id}" key="{ProjectCodeModel>name}-{ProjectCodeModel>id}" />
+						</Select>
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+					</HBox>
+					
+					<HBox>
+						<Label text="{i18n>EMP_ID}:" required="true" class="crfLabelClass" />
+						<!-- Addition of Select control   -->
+						<Select	 id="idEmpId"  selectedKey="{crfModel>/empId}"
+								items="{empIdModel>/idAndNameDto}" change=""
+							 forceSelection="false" width="206px" class="sapUiSizeCompact crfSelectClass" enabled="false">
+							<core:ListItem text="{empIdModel>id}-{empIdModel>name}" key="{empIdModel>id}" />
+						</Select>
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+					</HBox>
+				</l:Grid>
+				</VBox>
+				
+			
+			<VBox class = "salesReportHdrBoxClass ">
+				<t:Table inset = "false" class = "tableClass updateResMgmtTableTablecolumn" enableColumnReordering="false"
+					rows = "{oResMgmtModel>/allocationDto}" id = "idResDataTable"
+					fixedColumnCount = "4" selectionMode = "None" visibleRowCount = "10">
+					<t:toolbar>
+						<Toolbar id = "tabToolbar" class = "toobarClass">
+							<content>
+								<Label text = "{i18n>RESOURCE_ALLOCATION}" class="resourceClass" design = "Bold" />
+								<ToolbarSpacer />
+								<!-- <SearchField id = "searchField" width = "300px"
+									placeholder = "Search... " liveChange = "filterResults" class = ""></SearchField> -->
+								<Button id = "editButton" text = "{i18n>EDIT}" type="Transparent"
+									press = "onEdit" enabled="false"/>
+									<!-- Commented based on demo comments -->
+								<Button id = "createButton" text = "{i18n>CREATE}" type = "Transparent"
+									press = "onCreate" visible = "true" enabled="false"/> 
+								<Button id = "cancelButton" text = "{i18n>CANCEL}" type="Reject"
+									press = "onCancel" visible = "false" />
+								<Button id = "submitButton" text = "{i18n>SUBMIT}" type="Emphasized"
+									press = "onSubmit" visible = "true" />
+							</content>
+						</Toolbar>
+					</t:toolbar>
+					<t:columns>
+						<t:Column width = "7.5rem" resizable="false">
+							<Label text = "{i18n>EMPLOYEE_ID}" class = "" />
+							<t:template>
+								<Input value = "{oResMgmtModel>empId}" name="tabEmpID" maxLength = "10" valueStateText = "Invalid Employee Id" valueState="{oResMgmtModel>tabEmpIdvalueState}"
+									editable = '{= ${oResMgmtModel>nonEditable}==="true"?true:false }' change='onChangeTab' class="inptclss" />
+							</t:template>
+						</t:Column>
+						<t:Column width = "9rem" resizable="false">
+							<Label text = "{i18n>EMPLOYEE_NAME}" class = "" />
+							<t:template>
+								<Text text = "{oResMgmtModel>empName}" maxLength = "100" valueStateText = "Invalid Employee Name" valueState="{oResMgmtModel>tabEmpnamevalueState}" name="tabEmpName"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab' wrapping = "true" class="txtclss" />
+							</t:template>
+						</t:Column>
+							<t:Column width = "8rem" resizable="false">
+							<Label text = "{i18n>PROJECT_CODE}" class = "" />
+							<t:template>
+								<Input value = "{oResMgmtModel>projectCode}" maxLength = "20" valueStateText = "Invalid Project Code" name="tabProjCode" valueState="{oResMgmtModel>tabProjCodevalueState}" 
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab' class="inptclss" />
+							</t:template>
+						</t:Column>
+							<t:Column width = "8rem" resizable="false">
+							<Label text = "{i18n>PROJECT_NAME}" class = "" />
+							<t:template>
+								<Text text = "{oResMgmtModel>projectName}" maxLength = "100" valueStateText = "Invalid Project Name" valueState="{oResMgmtModel>tabProjNamevalueState}"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' wrapping = "true"   class="txtclss" />
+							</t:template>
+						</t:Column>
+						<t:Column width = "11rem"  resizable="false">
+							<Label text = "{i18n>ALLOCATION_STARTDATE}" class = "" />
+							<t:template>
+								<DatePicker id = "idDatePicker" valueStateText = "Invalid Allocation Start Date"  valueState="{oResMgmtModel>tabAllocStrtDatevalueState}"
+									value = '{path:"oResMgmtModel>actualStartDate",
+							formatter:"com.incture.util.formatter.fn_formatDate"  
+							}'
+									displayFormat = "MMM d, y" valueFormat = "MMM d, y" placeholder = "mm/dd/yyyy"
+									editable = '{= ${oResMgmtModel>/createFlag} === true ? (${oResMgmtModel>nonEditable}==="true"?true:false) : (${oResMgmtModel>/editable}=== true?true:false) }'
+									change = "updateStartDate"  class="inptclss"/>
+							</t:template>
+						</t:Column>
+						<t:Column width = "10rem" resizable="false">
+							<Label text = "{i18n>ROLLOFF_DATE}" class = "" />
+							<t:template>
+								<DatePicker id = "idRollOffDate" valueStateText = "Invalid Roll Off Date" valueState="{oResMgmtModel>tabRollOffvalueState}"
+									value = '{path:"oResMgmtModel>rollOffDate",formatter:"com.incture.util.formatter.fn_formatDate"}'
+									placeholder = "mm/dd/yyyy" displayFormat="MMM d, y" valueFormat="yyyy-MM-dd"
+									editable = '{= ${oResMgmtModel>/createFlag} === true ? (${oResMgmtModel>nonEditable}==="true"?true:false) : (${oResMgmtModel>/editable}=== true?true:false) }'
+									change = "updateRollOffDate"  class="inptclss"/>
+							</t:template>
+						</t:Column>
+						
+						<t:Column width = "4.5rem" resizable="false">
+							<Label text = "{i18n>BILL}" class="" />
+							<t:template>
+								<Input value = "{oResMgmtModel>billPercent}"  maxLength = "3" type="Number" change="onChangeBillpercent" 
+									editable = '{= ${oResMgmtModel>/createFlag} === true ? (${oResMgmtModel>nonEditable}==="true"?true:false) : (${oResMgmtModel>/editable}=== true?true:false) }'  class="inptclss"/>
+							</t:template>
+						</t:Column>
+						<t:Column width = "6rem" resizable="false">
+							<Label text = "{i18n>UTILIZATION}" class = "" />
+							<t:template>
+								<Input value = "{oResMgmtModel>utilizationPercent}" maxLength = "3" type="Number" change="onChangeUtilpercent" 
+									editable = '{= ${oResMgmtModel>/createFlag} === true ? (${oResMgmtModel>nonEditable}==="true"?true:false) : (${oResMgmtModel>/editable}=== true?true:false) }' class="inptclss"/>
+							</t:template>
+						</t:Column>
+						<t:Column width = "6rem" resizable="false">
+							<Label text = "{i18n>COMMENT}" class="" />
+							<t:template>
+							<TextArea value="{oResMgmtModel>pmComment}" valueStateText = "Please mention comments" valueState="{oResMgmtModel>tabpmcommentvalueState}" change="onCommentChange" editable = '{= ${oResMgmtModel>/createFlag} === true ? (${oResMgmtModel>nonEditable}==="true"?true:false) : (${oResMgmtModel>/editable}=== true?true:false) }'  maxLength = "100" rows="1" class="inptclss crfTextAreaStyleClass" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width = "8rem" resizable="false">
+							<Label text = "{i18n>ALLOCATION_STATUS}" class = "" />
+							<t:template>
+								<Input value = "{oResMgmtModel>allocationStatus}" valueStateText = "Invalid Allocation Status" valueState="{oResMgmtModel>tabAllocStatusvalueState}"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab' class="inptclss "/>
+							</t:template>
+						</t:Column>
+						
+						<t:Column width = "8rem" resizable="false">
+							<Label text = "{i18n>PRJ_MANAGER}" class = "" />
+							<t:template>
+								<Input value = "{oResMgmtModel>projectManager}" name="tabProjManager" maxLength = "100" valueStateText = "Invalid Project Manager" valueState="{oResMgmtModel>tabProjMgrNamevalueState}"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab' class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width = "9.5rem" resizable="false">
+							<Label text = "{i18n>PEOPLE_MANAGER}" class = "" />
+							<t:template>
+								<Input value = "{oResMgmtModel>peopleManagerName}" valueStateText = "Invalid Account Code" valueState="{oResMgmtModel>tabAccCodevalueState}" name="tabaccountCode"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab'  class="inptclss"/>
+							</t:template>
+						</t:Column> 
+						
+						<t:Column width = "8rem" resizable="false">
+							<Label text = "{i18n>DESIGNATION}" class = "" />
+							<t:template>
+								<Text text = "{oResMgmtModel>designation}" valueStateText = "Invalid Designation" valueState="{oResMgmtModel>tabDesigvalueState}" name="tabDesignation"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab' wrapping = "true" class="txtclss"  />
+							</t:template>
+						</t:Column>
+						
+							
+						<t:Column width = "6rem" resizable="false">
+							<Label text = "{i18n>SUB_GRADE}" class = "" />
+							<t:template>
+								<Input value = "{oResMgmtModel>subGrade}"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' class="inptclss"/>
+							</t:template>
+						</t:Column>
+						
+						<t:Column width = "8rem" resizable="false">
+							<Label text = "{i18n>WORK_LOCATION}" class = "" />
+							<t:template>
+								<Input value = "{oResMgmtModel>location}" maxLength = "20" valueStateText = "Invalid Location" valueState="{oResMgmtModel>tabLocationvalueState}" name="tabWorkLocation"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab' class="inptclss"/>
+							</t:template>
+						</t:Column>
+						<t:Column width = "9rem" resizable="false">
+							<Label text = "{i18n>ONSHORE_OFFSITE}" class = "" />
+							<t:template>
+								<Input
+									value = '{path:"oResMgmtModel>offshore"}' valueStateText = "Invalid Offshore/Onshore" valueState="{oResMgmtModel>taboffShorevalueState}" name="tabOnshoreVal"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab' class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width = "8.5rem" resizable="false">
+							<Label text = "{i18n>SOFTLOCK_STARTDATE}" class = "" />
+							<t:template>
+								<DatePicker
+									value = '{path:"oResMgmtModel>softLockStartDate" , formatter:"com.incture.util.formatter.formatDate"}'
+									placeholder = "mm/dd/yyyy" displayFormat = "MMM d, y" valueFormat = "yyyy-MM-dd"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}'  class="inptclss"/>
+							</t:template>
+						</t:Column>
+						
+						<t:Column width = "8.5rem" resizable="false">
+							<Label text = "{i18n>SOFTLOCK_ENDDATE}" class = "" />
+							<t:template>
+								<DatePicker
+									value = '{path:"oResMgmtModel>softLockEndDate", formatter:"com.incture.util.formatter.fn_formatDate"}'
+									placeholder = "mm/dd/yyyy" displayFormat = "MMM d, y" valueFormat = "yyyy-MM-dd"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width = "7.5rem" resizable="false">
+							<Label text = "{i18n>ACCOUNT_NAME}" class = "" />
+							<t:template>
+								<Input value = "{oResMgmtModel>accountName}" name="tabAccName" valueStateText = "Invalid Account Name" valueState="{oResMgmtModel>tabAccNamevalueState}"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab' class="inptclss"/>
+							</t:template>
+						</t:Column>
+							<t:Column width = "7.5rem" resizable="false">
+							<Label text = "{i18n>ACCOUNT_CODE}" class = "" />
+							<t:template>
+								<Input value = "{oResMgmtModel>accountCode}" valueStateText = "Invalid Account Code" valueState="{oResMgmtModel>tabAccCodevalueState}" name="tabaccountCode"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab'  class="inptclss"/>
+							</t:template>
+						</t:Column>
+						
+					
+						<!-- Added for TSCT 133 -->
+					
+						<t:Column width = "8rem" resizable="false">
+							<Label text = "{i18n>PrimarySkills}" class = "" />
+							<t:template>
+								<Text text = "{oResMgmtModel>primarySkills}" valueStateText = "Invalid Account Code" valueState="{oResMgmtModel>tabAccCodevalueState}" name="tabaccountCode"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab' wrapping = "true" class="txtclss"  />
+							</t:template>
+						</t:Column>
+						<t:Column width = "8rem" resizable="false">
+							<Label text = "{i18n>YEARS_OF_EXP}" class = "" />
+							<t:template>
+								<Input value = "{oResMgmtModel>totalExp}" valueStateText = "Invalid Account Code" valueState="{oResMgmtModel>tabAccCodevalueState}" name="tabaccountCode"
+									editable = '{path:"oResMgmtModel>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}' change='onChangeTab'   class="inptclss"/>
+							</t:template>
+						</t:Column>
+						<!-- End of TSCT 133 -->
+					</t:columns>
+				</t:Table>
+			</VBox> 
+
+		</content>
+
+	</Page>
+</core:View>

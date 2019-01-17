@@ -1,0 +1,80 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	controllerName="com.incture.controller.App" xmlns:layout="sap.ui.layout"
+	xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:html="http://www.w3.org/1999/xhtml">
+	<u:Shell id="myShell" icon="" class="inctureMDShellClass">
+		<u:header>
+			<!-- Application header. Uses GRID 1. for Responsiveness and to show/hide 
+				controls on screen resize -->
+			<layout:Grid class="inctureMDBarClass">
+				<!-- HBox to hold the Menu (Show Master Icon. visible only on Small screen -->
+				<HBox displayInline="true" width='100%' class="" height="3rem"
+					justifyContent="Start" alignItems="Center">
+					<core:Icon src="sap-icon://menu2" size="1.5rem" color="white"
+						press="onShowMaster" />
+					<layoutData>
+						<layout:GridData spanS="3" visibleL='false'
+							visibleM='false' visibleS='true'>
+						</layout:GridData>
+					</layoutData>
+				</HBox>
+				<!-- Company Logo goes here. -->
+				<HBox displayInline="true">
+					<Image src="./images/cherrywork_logo.png" width="8rem"
+						height="2rem" />
+					<layoutData>
+						<layout:GridData spanXL="2" spanL='2' spanM='4'
+							visibleL='true' visibleM='true' visibleS='false'>
+						</layout:GridData>
+					</layoutData>
+				</HBox>
+				<!-- Application wide search field. Suggest data is coming from init_data.json 
+					File and default model <SearchField placeholder="Search..." id='searchField' 
+					class="inctureMDSearchFieldClass" enableSuggestions='true' suggestionItems="{/searchSuggestList}" 
+					suggest="onSuggest" search="onSearch"> <suggestionItems> <SuggestionItem 
+					key="{key}" text='{desc}' /> </suggestionItems> <layoutData> <layout:GridData 
+					spanXL="8" spanL='8' spanM='6' visibleL='true' visibleM='true' visibleS='false'> 
+					</layout:GridData> </layoutData> </SearchField> -->
+				<!-- Right hand side bar. User ICON and Notification ICON are present 
+					here. -->
+				<u:Shell id="idShell" icon="./images/cherrywork_logo.png"
+					class="inctureMDShellClass">
+					<u:headItems>
+						<!-- <u:ShellHeadItem id="idHdrMenu" icon="sap-icon://menu2" press="onShowMaster" 
+							/> -->
+					</u:headItems>
+					<!-- <u:search> <SearchField class="inctureMDSearchFieldClass"></SearchField> 
+						</u:search> -->
+					<u:headEndItems>
+						<!-- <u:ShellHeadItem icon="./images/cart.png" press="handleCart" /> -->
+<!-- 						<u:ShellHeadItem icon="sap-icon://bell" press="handleNotifications" /> -->
+					</u:headEndItems>
+					<u:user>
+						<u:ShellHeadUserItem image="./images/placeholder.png"
+							press="onUserPress" />
+					</u:user>
+					<u:content>
+						<!-- Split App to hold our pages. -->
+						<SplitApp id='idSplitApp1' mode="ShowHideMode" class='inctureMDSplitAppClass' />
+					</u:content>
+				</u:Shell>
+				<!-- <HBox displayInline="true" width='100%' height="3rem" justify-content="End" 
+					alignItems="Center" position="relative"> <items> <core:Icon src="sap-icon://bell" 
+					align-items="Right" size="1.5rem" color="white" press="handleNotifications" 
+					> <core:layoutData> <layout:GridData spanXL="6" spanL='6' spanM='2' spanS='12' 
+					visibleL='true' visibleM='true' visibleS='true'> </layout:GridData> </core:layoutData> 
+					</core:Icon> This Person image is hidden on small screens using the CSS. 
+					Search for inctureMDPersonImageClass in CSS <Image src="./images/placeholder.png" 
+					class="incMRoundBorderRadiusClass inctureMDPersonImageClass " width="2rem" 
+					height="2rem" press="onUserPress"> <layoutData> <layout:GridData visibleS='false' 
+					visibleOnSmall='false'> </layout:GridData> </layoutData> </Image> </items> 
+					<layoutData> <layout:GridData spanXL="5" spanL='2' spanM='2' spanS='9'> </layout:GridData> 
+					</layoutData> </HBox> -->
+			</layout:Grid>
+			<!-- Header Grid finishes here. -->
+		</u:header>
+		<u:content>
+			<!-- Split App to hold our pages. -->
+			<SplitApp id='idSplitApp' mode="ShowHideMode" class='inctureMDSplitAppClass' />
+		</u:content>
+	</u:Shell>
+</core:View>

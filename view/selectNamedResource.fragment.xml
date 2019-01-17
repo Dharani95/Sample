@@ -1,0 +1,137 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:t="sap.ui.table" xmlns:core="sap.ui.core">
+	<Dialog title="Select Named Resource" stretch="false"
+		contentWidth="90%" class="sapUiSizeCompact">
+		<buttons>
+			<Button text="Select Resource" press="onResourceSelect" />
+			<Button text="Cancel" press="onCancel" />
+		</buttons>
+		<VBox class="salesReportHdrBoxClass">
+			<l:Grid defaultSpan="L4 M6 S12" class="detailGridClass">
+				<HBox>
+					<Label text="{i18n>EmpName}:" class="gridLblClass" />
+					<Input id="idEmpName" type="Text" placeholder="Enter Emp Name ..."
+						showSuggestion="true" suggestionItems="{EmpSuggestion>/idAndNameDto}" 
+						suggest="onEmpChange" startSuggestion="3" suggestionItemSelected="onSuggestionItemSelect">
+						<suggestionItems>
+					  		<core:Item text="{EmpSuggestion>name}" />
+					 	</suggestionItems>
+					</Input>
+					<layoutData>
+						<l:GridData span="L4 M6 S12" />
+					</layoutData>
+				</HBox>
+				<HBox>
+					<Label text="{i18n>EmpId}:" class="gridLblClass" />
+					<Input id="idEmpId" type="Text" placeholder="Enter Emp Id ..."
+						showSuggestion="true" suggest="onEmpChange" suggestionItemSelected="onSuggestionItemSelect"
+						suggestionItems="{EmpSuggestion>/idAndNameDto}" startSuggestion="3">
+						<suggestionItems>
+					  		<core:Item text="{EmpSuggestion>id}" />
+					 	</suggestionItems>
+					</Input>
+					<layoutData>
+						<l:GridData span="L4 M6 S12" />
+					</layoutData>
+				</HBox>
+				<HBox>
+					<Button text="Search" press="onEmpSearch" />
+					<layoutData>
+						<l:GridData span="L4 M6 S12" />
+					</layoutData>
+				</HBox>
+			</l:Grid>
+
+			<t:Table id="idSelectNamedRsrc" fixedColumnCount="3" rows="{NamedResource>/listAllocationDto}"
+				selectionMode="None" visibleRowCount="8">
+				<t:columns>
+					<t:Column width="10rem">
+						<Label text="{i18n>EmpName}" />
+						<t:template>
+							<Text text="{NamedResource>empName}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem">
+						<Label text="{i18n>SubGrade}" />
+						<t:template>
+							<Text text="{NamedResource>subGrade}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="8rem">
+						<Label text="{i18n>Location}" />
+						<t:template>
+							<Text text="{NamedResource>location}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="8rem">
+						<Label text="{i18n>ONSHORE_OFFSITE}" />
+						<t:template>
+<!-- 							<Text text="{NamedResource>offshore}" /> -->
+							<Text text="{=${NamedResource>offshore} === 'true' ? 'Offsite' : 'Onshore'}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="10rem">
+						<Label text="{i18n>PRJ_MANAGER}" />
+						<t:template>
+							<Text text="{NamedResource>projectManager}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="10rem">
+						<Label text="{i18n>PRJ_CODENAME}" />
+						<t:template>
+							<Text text="{NamedResource>projectCode}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="18rem">
+						<Label text="{i18n>PrjNAME}" />
+						<t:template>
+							<Text text="{NamedResource>projectName}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="9rem">
+						<Label text="{i18n>SOFTLOCK_STARTDATE}" />
+						<t:template>
+							<Text text="{NamedResource>softLockStDate}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="9rem">
+						<Label text="{i18n>SOFTLOCK_ENDDATE}" />
+						<t:template>
+							<Text text="{NamedResource>softLockEndDate}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="9rem" hAlign="End">
+						<Label text="{i18n>ActualStartDate}" />
+						<t:template>
+							<Text text="{path:'NamedResource>actualStartDate', formatter:'com.incture.util.formatter.formatDate'}" /> 
+						</t:template>
+					</t:Column>
+					<t:Column width="8rem" hAlign="End">
+						<Label text="{i18n>ROLLOFF_DATE}" />
+						<t:template>
+							<Text text="{path:'NamedResource>rollOffDate', formatter:'com.incture.util.formatter.formatDate'}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="4rem">
+						<Label text="{i18n>BILL}" />
+						<t:template>
+							<Text text="{NamedResource>billPercent}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem">
+						<Label text="{i18n>UTILIZATION}" />
+						<t:template>
+							<Text text="{NamedResource>utilizationPercent}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="8rem">
+						<Label text="{i18n>ALLOCATION_STATUS}" />
+						<t:template>
+							<Text text="{NamedResource>allocationStatus}" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+		</VBox>
+	</Dialog>
+</core:FragmentDefinition>

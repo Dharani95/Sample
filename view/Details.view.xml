@@ -1,0 +1,68 @@
+<core:View xmlns:core = "sap.ui.core" xmlns:mvc = "sap.ui.core.mvc"
+	xmlns = "sap.m" xmlns:u = 'sap.uxap' xmlns:layout = "sap.ui.layout"
+	controllerName = "com.incture.controller.Details" xmlns:html = "http://www.w3.org/1999/xhtml">
+	
+	<Page showHeader="false" class="viewClass">
+
+
+		<Label text="{i18n>WELCOMETOTSCT}" class="labeltxtClass  titleInnerBoxStyle"
+			press="onNavTo"></Label>
+
+
+		<HBox class="tileClass">
+
+			<VBox id="idInbox" visible="false">
+				<GenericTile  class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiLargeMarginEnd  tileAlign textClass  tileLayout "
+					header="{i18n>INBOX}" design="bold" press="onNavTo">
+					<tileContent>
+						<TileContent footer="Open tasks" class="tileStyle">
+							<content>
+								<ImageContent src="sap-icon://inbox" class="iconClass" />
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+			</VBox>
+			<VBox id="idProjectMgt" visible="false">
+				<GenericTile    class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiLargeMarginEnd  tileAlign textClass "
+					header="{i18n>PROJECTMANAGEMENT}" press="onNavTo">
+
+					<tileContent>
+						<TileContent footer="Assign Resources"  class="tileStyle">
+							<content>
+								<ImageContent src="./images/prjctmanagement.png" class="imgClass" />
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+			</VBox>
+			<VBox  id="idCrf" visible="false">
+				<GenericTile   class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiLargeMarginEnd  tileAlign textClass "
+					header="{i18n>CHANGEREQUESTFORM}" press="onNavTo">
+
+					<tileContent>
+						<TileContent   class="tileStyle">
+							<content>
+								<ImageContent src="sap-icon://request" class="iconClass" />
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+			</VBox>
+			<VBox id="idResourceMgt" visible="false">
+				<GenericTile  class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiLargeMarginEnd tileAlign textClass"
+					header="{i18n>RESOURCEMANAGEMENT}" design="bold" press="onNavTo">
+					<tileContent>
+						<TileContent footer="Allocation Update" class="tileStyle">
+							<content>
+								<ImageContent src="./images/resourcemanagement.png"  class="imgClass"/>
+							</content>
+						</TileContent>
+					</tileContent>
+
+				</GenericTile>
+			</VBox>
+		</HBox>
+
+	</Page>
+</core:View>

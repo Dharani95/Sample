@@ -1,0 +1,346 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" class="sapUiSizeCompact" controllerName="com.incture.controller.matchedResources"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:t="sap.ui.table">
+	<Page title="Title" showHeader="false" enableScrolling="false">
+		<content>
+			
+			<VBox class="salesReportHdrBoxClass ">
+			
+				<t:Table inset="false" class="searchResMgmtTableTablecolumn" 
+					enableColumnReordering="false" selectionMode="None"
+					rows= "{
+						path : 'ResourceMatched>/listAllocationDto',
+						sorter : [
+								{ path: 'primarySkills',
+								  descending :false 
+								},
+								{ path: 'empName',
+								  descending :false 
+								},
+								{ path: 'availableFrom',
+								  descending : false
+								}
+						]					
+					}"
+					id="idResDataTable" fixedColumnCount="4" 
+					visibleRowCount="12" columnHeaderHeight="70">
+					<t:toolbar>
+						<Toolbar id="tabToolbar" class="toobarClass">
+							<content>
+								<Button icon="sap-icon://arrow-left" press="onBack" />
+								<ToolbarSpacer />
+							
+								<Label text="{i18n>ResultTitle}" class="resourceClass"
+									design="Bold" />
+								<ToolbarSpacer />
+								
+								
+								<Button text= "{i18n>FILTER_CLEAR}" press ="onClear" class="sapUiSmallMarginEnd" type="Reject" />
+								<Button id="submitButton" text="{i18n>CONTINUE}" type="Emphasized"
+									press="onSubmit" visible="true" />
+							</content>
+						</Toolbar>
+					</t:toolbar>
+					<t:columns>
+						<t:Column width="3rem" resizable="false">
+							<t:template>
+								<CheckBox  selected="{ResourceMatched>selectedItem}" />
+							</t:template>
+						</t:Column>
+						<t:Column width="7.5rem" resizable="false">
+							<VBox>
+							<Label text="{i18n>EMPLOYEE_ID}" class="" />
+							<Input id="Input1" liveChange="onTblSearch" 
+									 search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Input value="{ResourceMatched>empId}" name="tabEmpID"
+									maxLength="10" valueStateText="Invalid Employee Id"
+									valueState="{ResourceMatched>tabEmpIdvalueState}"
+									editable='{= ${ResourceMatched>nonEditable}==="true"?true:false }'
+									change='onChangeTab' class="inptclss" />
+							</t:template>
+						</t:Column>
+						<t:Column width="9rem" resizable="false">
+							
+							
+							<VBox>
+							<Label text="{i18n>EMPLOYEE_NAME}" class="" />
+							<Input id="Input2" liveChange="onTblSearch" 
+									 search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Text text='{path:"ResourceMatched>empName",formatter:"com.incture.util.formatter.fn_empNameFormatter"}' maxLength="100"
+									valueStateText="Invalid Employee Name" valueState="{ResourceMatched>tabEmpnamevalueState}"
+									name="tabEmpName"
+									editable='{path:"ResourceMatched>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}'
+									change='onChangeTab' wrapping="true" class="txtclss" />
+							</t:template>
+						</t:Column>
+						<t:Column width="6rem" resizable="false">
+							
+							
+							<VBox>
+							<Label text="{i18n>SUB_GRADE}" class="" />
+							<Input id="Input3" liveChange="onTblSearch" 
+									 search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							
+							<t:template>
+								<!-- <Input value="{ResourceMatched>subGrade}"
+									editable='{path:"ResourceMatched>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}'
+									class="inptclss" /> -->
+									<ObjectNumber number="{ResourceMatched>subGrade}" 
+									state="{path:'ResourceMatched>allocationType', formatter:'.stateFormatter'}" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width="8rem" resizable="false">
+							
+							<VBox>
+							<Label text="{i18n>PrimarySkills}" class="" />
+							<Input id="Input4" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Text text="{ResourceMatched>primarySkills}"
+									valueStateText="Invalid Account Code" valueState="{ResourceMatched>tabAccCodevalueState}"
+									name="tabaccountCode"
+									editable='{path:"ResourceMatched>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}'
+									change='onChangeTab' wrapping="true" class="txtclss" />
+							</t:template>
+						</t:Column>
+						<t:Column width="4.5rem" resizable="false">
+							
+							
+							<VBox>
+							<Label text="{i18n>BILL}" class="" />
+							<Input id="Input5" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Input value="{ResourceMatched>billPercent}" type="Number"
+									maxLength="3" change="onChangeBillpercent"
+									editable='{= ${ResourceMatched>/createFlag} === true ? (${ResourceMatched>nonEditable}==="true"?true:false) : (${ResourceMatched>/editable}=== true?true:false) }'
+									class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width="6rem" resizable="false">
+							
+							
+							<VBox>
+							<Label text="{i18n>UTILIZATION}" class="" />
+							<Input id="Input6" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Input value="{ResourceMatched>utilizationPercent}" type="Number"
+									maxLength="3" change="onChangeUtilpercent"
+									editable='{= ${ResourceMatched>/createFlag} === true ? (${ResourceMatched>nonEditable}==="true"?true:false) : (${ResourceMatched>/editable}=== true?true:false) }'
+									class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width="8rem" resizable="false">
+							
+							<VBox>
+							<Label text="{i18n>Curr%Avail}" class="" />
+							<Input id="Input7" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Input value="{ResourceMatched>availablePercent}" type="Number"
+									maxLength="3" change="onChangeUtilpercent"
+									editable='{= ${ResourceMatched>/createFlag} === true ? (${ResourceMatched>nonEditable}==="true"?true:false) : (${ResourceMatched>/editable}=== true?true:false) }'
+									class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width="6rem" resizable="false">
+							
+							
+							<VBox>
+							<Label text="{i18n>ALLOCATION}" class="" />
+							<Input id="Input8" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Input value="{ResourceMatched>allocationPercentage}" type="Number"
+									maxLength="3" change="onAllocationChange"
+									editable='true'
+									class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						
+						<t:Column width="11rem" resizable="false">
+							
+							<VBox>
+							<Label text="{i18n>AvailFrom}" class="" />
+							<Input id="Input9" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<DatePicker id="idDatePicker" valueStateText="Invalid Allocation Start Date"
+									valueState="{ResourceMatched>tabAllocStrtDatevalueState}"
+									value='{path:"ResourceMatched>availableFrom",
+											formatter:"com.incture.util.formatter.formatDateAvailableFrom" }'
+									displayFormat="MMM d, y" valueFormat="MMM d, y" placeholder="mm/dd/yyyy"
+									editable='{= ${ResourceMatched>/createFlag} === true ? (${ResourceMatched>nonEditable}==="true"?true:false) : (${ResourceMatched>/editable}=== true?true:false) }'
+									change="updateStartDate" class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width="10rem" resizable="false">
+							
+							
+							<VBox>
+							<Label text="{i18n>AvailTo}" class="" />
+							<Input id="Input10" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<!-- <Text text='{path:"ResourceMatched>rollOffDate",formatter:"com.incture.util.formatter.fn_formatDate"}' 
+									/> -->
+								<DatePicker id="idRollOffDate" valueStateText="Invalid Roll Off Date"
+									valueState="{ResourceMatched>tabRollOffvalueState}"
+									value='{path:"ResourceMatched>availableTo",formatter:"com.incture.util.formatter.formatDateAvailableTo"}'
+									placeholder="mm/dd/yyyy" displayFormat="MMM d, y" valueFormat="MMM d, y"
+									editable='{= ${ResourceMatched>/createFlag} === true ? (${ResourceMatched>nonEditable}==="true"?true:false) : (${ResourceMatched>/editable}=== true?true:false) }'
+									 class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width="9rem" resizable="false">
+							
+							<VBox>
+							<Label text="{i18n>SecndSkills}" class="" />
+							<Input id="Input11" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Input value="{ResourceMatched>secondarySkills}" 
+									 change="onChangeUtilpercent"
+									editable='{= ${ResourceMatched>/createFlag} === true ? (${ResourceMatched>nonEditable}==="true"?true:false) : (${ResourceMatched>/editable}=== true?true:false) }'
+									class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						
+						
+						<t:Column width="8rem" resizable="false">
+							
+							<VBox>
+							<Label text="{i18n>BUSINESS_UNIT}" class="" />
+							<Input id="Input12" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Input value="{ResourceMatched>businessUnit}" 
+									 change="onChangeUtilpercent"
+									editable='{= ${ResourceMatched>/createFlag} === true ? (${ResourceMatched>nonEditable}==="true"?true:false) : (${ResourceMatched>/editable}=== true?true:false) }'
+									class="inptclss" />
+							</t:template>
+						</t:Column>
+						<t:Column width="8rem" resizable="false">
+							
+							<VBox>
+							<Label text="{i18n>ONSHORE_OFFSITE}" class="" />
+							<Input id="Input13" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Input value="{ResourceMatched>offshore}" 
+									 change="onChangeUtilpercent"
+									editable='{= ${ResourceMatched>/createFlag} === true ? (${ResourceMatched>nonEditable}==="true"?true:false) : (${ResourceMatched>/editable}=== true?true:false) }'
+									class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width="9.5rem" resizable="false">
+							
+							<VBox>
+							<Label text="{i18n>PEOPLE_MANAGER}" class="" />
+							<Input id="Input14" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Input value="{ResourceMatched>peopleManagerName}"
+									valueStateText="Invalid Account Code" valueState="{ResourceMatched>tabAccCodevalueState}"
+									name="tabaccountCode"
+									editable='{path:"ResourceMatched>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}'
+									change='onChangeTab' class="inptclss" />
+							</t:template>
+						</t:Column>
+						<t:Column width="9.5rem" resizable="false">
+							
+							<VBox>
+							<Label text="{i18n>DELIVERY_MANAGER}" class="" />
+							<Input id="Input17" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Input value="{ResourceMatched>dmName}" 
+									valueStateText="Invalid Project Code" name="tabProjCode"
+									valueState="{ResourceMatched>tabProjCodevalueState}"
+									editable='{path:"ResourceMatched>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}'
+									change='onChangeTab' class="inptclss" />
+							</t:template>
+						</t:Column>
+						
+						<t:Column width="8rem" resizable="false">
+							
+							<VBox>
+							<Label text="{i18n>DESIGNATION}" class="" />
+							<Input id="Input15" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Text text="{ResourceMatched>designation}" valueStateText="Invalid Designation"
+									valueState="{ResourceMatched>tabDesigvalueState}" name="tabDesignation"
+									editable='{path:"ResourceMatched>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}'
+									change='onChangeTab' wrapping="true" class="txtclss" />
+							</t:template>
+						</t:Column>
+						
+						
+						<t:Column width="14rem" resizable="false">
+							
+							<VBox>
+							<Label text="{i18n>EmailId}" class="" />
+							<Input id="Input16" liveChange="onTblSearch" 
+									selectOnFocus="false" search="onTblSearch"
+										class="tblSrchFldClass inputFieldClass"  />
+							</VBox>
+							<t:template>
+								<Input value="{ResourceMatched>emailId}" 
+									valueStateText="Invalid Project Code" name="tabProjCode"
+									valueState="{ResourceMatched>tabProjCodevalueState}"
+									editable='{path:"ResourceMatched>nonEditable",formatter:"com.incture.util.formatter.fn_editabilityCheck"}'
+									change='onChangeTab' class="inptclss" />
+							</t:template>
+						</t:Column>
+						<!-- End of TSCT 133 -->
+					</t:columns>
+				</t:Table>
+			</VBox>
+		</content>
+	</Page>
+</core:View>

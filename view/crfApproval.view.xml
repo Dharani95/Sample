@@ -1,0 +1,158 @@
+<core:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f.semantic"
+	class="sapUiSizeCompact" controllerName="com.incture.controller.crfApproval"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Title" showHeader="false">
+		<content>
+			<VBox class="salesReportHdrBoxClass">
+				<Toolbar height="3rem">
+					<Title text="{i18n>ProjectDet}" level="H3" titleStyle="H3"
+						class="sapUiTinyMarginBegin" />
+				</Toolbar>
+				<l:Grid defaultSpan="L6 M6 S12" class="detailGridClass">
+					<HBox class="sapUiTinyMarginBegin">
+						<Label text="{i18n>ProjectName}" class="gridLblClass" />
+						<Text id="idApprvProjectName" text="{ApprovalModel>/projectName}"
+							class="approvalHdrTextMargin" />
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+					</HBox>
+					<HBox>
+						<Label text="{i18n>ProjectCode}" class="gridLblClass sapUiLargeMarginBegin" />
+						<Text id="idApprvProjectCode" class="approvalHdrTextMargin"
+							text="{ApprovalModel>/projectCode}" />
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+					</HBox>
+<!-- 					<HBox id="projectStartDateHBox" class="sapUiTinyMarginBegin sapUiTinyMarginBottom"> -->
+<!-- 						<Label text="Start Date:" class="gridLblClass" /> -->
+<!-- 						<Text id="idApprvStartDate" class="approvalHdrTextMargin" -->
+<!-- 							text="{path:'ApprovalModel>/projStartDate', formatter:'com.incture.util.formatter.formatDate'}" /> -->
+<!-- 						<layoutData> -->
+<!-- 							<l:GridData span="L6 M6 S12" /> -->
+<!-- 						</layoutData> -->
+<!-- 					</HBox> -->
+<!-- 					<HBox id="projectEndDateHBox"> -->
+<!-- 						<Label text="End Date:" class="gridLblClass sapUiLargeMarginBegin" /> -->
+<!-- 						<Text id="idApprvSEndDate" class="approvalHdrTextMargin" -->
+<!-- 							text="{path:'ApprovalModel>/projEndDate', formatter:'com.incture.util.formatter.formatDate'}" /> -->
+<!-- 						<layoutData> -->
+<!-- 							<l:GridData span="L6 M6 S12" /> -->
+<!-- 						</layoutData> -->
+<!-- 					</HBox> -->
+				</l:Grid>
+			</VBox>
+
+			<VBox class="salesReportHdrBoxClass">
+				<Table id="idResourceTbl" mode="SingleSelectMaster"
+					items="{path:'ApprovalModelList>/allocationDto',
+							sorter: {
+								path: 'primarySkills',
+								descending: true,
+								group: true
+							}
+						}"
+					class="materialTblClass">
+					<headerToolbar>
+						<Toolbar class="TableHeadingClass">
+							<Title text="Allocated Resources" level="H3" titleStyle="H3" />
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column>
+							<Text text="{i18n>EmpName}" class="matTblHdrClass" />
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>EmailId}" class="matTblHdrClass" />
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>Designation}" class="matTblHdrClass" />
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>SubGrade}" class="matTblHdrClass" />
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>PrimarySkills}" class="matTblHdrClass" />
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>SecndSkills}" class="matTblHdrClass" />
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>AllocPc}" class="matTblHdrClass" />
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>AllocatedFrom}" class="matTblHdrClass" />
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>AllocatedTo}" class="matTblHdrClass" />
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="RM Comments" class="matTblHdrClass" />
+						</Column>
+<!-- 						<Column minScreenWidth="Tablet" demandPopin="true"> -->
+<!-- 							<Text text="Reason" class="matTblHdrClass" /> -->
+<!-- 						</Column> -->
+						<Column minScreenWidth="Tablet" demandPopin="true" width="13%">
+							<Text text="" class="matTblHdrClass" />
+						</Column>
+						
+					</columns>
+					<items>
+						<ColumnListItem ><!--  visible="{parts:['ApprovalModelList>allocationType','ApprovalModel>taskName'], formatter:'.disableFormatter'}"  -->
+							<cells>
+								<Input value="{ApprovalModelList>empName}" enabled="true"
+									editable="false" />
+								<Input value="{ApprovalModelList>emailId}" enabled="true"
+									editable="false" />
+								<Input value="{ApprovalModelList>designation}" enabled="true"
+									editable="false" />
+								<ObjectNumber number="{ApprovalModelList>subGrade}"
+									state="{path:'ApprovalModelList>allocationType', formatter:'.stateFormatter'}" />
+
+								<Input value="{ApprovalModelList>primarySkills}" enabled="true"
+									editable="false" />
+								<Input value="{ApprovalModelList>secondarySkills}"
+									enabled="true" editable="false" />
+								<Input value="{ApprovalModelList>billPercent}" enabled="true"
+									editable="false" />
+								<Input
+									value="{path:'ApprovalModelList>actualStartDate', formatter: 'com.incture.util.formatter.formatDate'}"
+									enabled="true" editable="false" />
+								<Input
+									value="{path:'ApprovalModelList>rollOffDate', formatter:'com.incture.util.formatter.formatDate'}"
+									enabled="true" editable="false" />
+									<!-- Addiiton for Message Popover -->
+							<Button  icon="sap-icon://message-popup" press="onMessageAddition" 
+             				class="sapUiTinyMarginBegin" id="idRejectionPush" visible="true"/> 
+						<!-- Addiiton for Message Popover -->
+<!-- 								<TextArea id="comments" valueLiveUpdate="true" /> -->
+								<VBox>
+									<RadioButtonGroup select="onApprovalPush" selectedIndex="-1"  enabled="{parts:['ApprovalModelList>allocationType','ApprovalModelList>rmApproval','ApprovalModelList>dmApproval'], formatter:'.disableFormatter'}" >
+										<buttons >
+											<RadioButton  text="Approve" id="idApprove" />
+											<RadioButton  text="Reject" id="idReject" />
+										</buttons>
+									</RadioButtonGroup>
+								</VBox>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</content>
+		<footer>
+			<OverflowToolbar id="rmInputFooter">
+				<ToolbarSpacer />
+				<Button type="Accept" text="Submit" press="onApproveReject"
+					id="idButtonApprove" class="sapUiSmallMarginEnd">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>CWD_CW-TSCM_D~cw_tscm~sapui5~web~oneapp.incture.com</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+<!-- 	============================================================== -->
+<!-- 	//AppCacheBuster Filter -->
+<!-- 	============================================================== -->
+	<filter>
+		<display-name>AppCacheBusterFilter</display-name>
+		<filter-name>AppCacheBusterFilter</filter-name>
+		<filter-class>com.sap.ui5.resource.AppCacheBusterFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AppCacheBusterFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> 
+<!--  ==================================================================  --> 
+  <security-constraint>
+   <display-name></display-name>
+   <web-resource-collection>
+     <web-resource-name>WebResource</web-resource-name>
+     <url-pattern>/*</url-pattern>
+   </web-resource-collection>
+   <auth-constraint>
+     <role-name>CW_TSCM_APP_ACCESS</role-name>
+   </auth-constraint>
+ </security-constraint>
+ <security-role>
+<role-name>CW_TSCM_APP_ACCESS</role-name>
+</security-role>
+  
+</web-app>

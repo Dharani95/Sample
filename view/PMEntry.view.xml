@@ -1,0 +1,120 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout"
+		xmlns:t="sap.ui.table" controllerName="com.incture.controller.PMEntry" xmlns:html="http://www.w3.org/1999/xhtml" class="sapUiSizeCompact">
+	<Page title="Title" showHeader="false" class="pageBackground">
+		<content>
+				<VBox class="salesReportHdrBoxClass">
+					<Toolbar height="3rem">
+							<Title text="{i18n>ProjectDet}" class="sapUiSmallMarginBegin" level="H3" titleStyle="H3" />
+					</Toolbar>
+					<l:Grid defaultSpan="L4 M6 S12" class="detailGridClass">
+					<HBox>
+						<Label required="true" text="{i18n>ACCOUNT_NAME}" class="gridLblClass" />
+						<Select	 id="idAccountName"  
+								items="{AccountDetails>/idAndNameDto}" change="onAccountNameChange"
+							 forceSelection="false" width="206px">
+							<core:ListItem text="{AccountDetails>name}" key="{AccountDetails>name}" />
+						</Select>
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+					</HBox>
+					
+					<HBox>
+					<Label required="true" text="{i18n>Project}" class="gridLblClass" />
+						<Select	 id="idProject"  enabled="false"
+								items="{ProjectDetails>/idAndNameDto}" 
+							 forceSelection="false" width="206px">
+							<core:ListItem  text="{ProjectDetails>id}-{ProjectDetails>name}" key="{ProjectDetails>id}-{ProjectDetails>name}" />
+						</Select>
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+					</HBox>
+<!-- 					<HBox> -->
+<!-- 						<Label required="true" text="{i18n>ProjectName}" class="gridLblClass" /> -->
+<!-- 						<Select	 id="idProjectName"  selectedKey="{/ProjectDetails/ProjectName}" -->
+<!-- 								items="{ProjectDetails>/projectCodeDto}" change="onProjectNameChange" -->
+<!-- 							 forceSelection="false" width="206px"> -->
+<!-- 							<core:ListItem text="{ProjectDetails>projectName}" key="{ProjectDetails>projectName}" /> -->
+<!-- 						</Select> -->
+<!-- 						<layoutData> -->
+<!-- 							<l:GridData span="L6 M6 S12" /> -->
+<!-- 						</layoutData> -->
+<!-- 					</HBox> -->
+<!-- 					<HBox> -->
+<!-- 					<Label required="true" text="{i18n>ProjectCode}" class="gridLblClass" /> -->
+<!-- 						<Select	 id="idProjectCode"  selectedKey="{/ProjectDetails/ProjectId}" -->
+<!-- 								items="{ProjectDetails>/projectCodeDto}" change="onProjectCodeChange" -->
+<!-- 							 forceSelection="false" width="206px"> -->
+<!-- 							<core:ListItem text="{ProjectDetails>projectCode}" key="{ProjectDetails>projectCode}" /> -->
+<!-- 						</Select> -->
+<!-- 						<layoutData> -->
+<!-- 							<l:GridData span="L6 M6 S12" /> -->
+<!-- 						</layoutData> -->
+					
+<!-- 					</HBox> -->
+				<HBox> 
+						<Label required="true" text="Start Date:" class="gridLblClass" />
+						<DatePicker id="idStartDate" value="{/ProjectDetails/ProjectStrtDate}" valueFormat="yyyy-MM-dd"
+							 change="onStartDateChange" valueState="{/ProjectDetails/ProjectStrtDateValState}"/>
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+	 				</HBox>
+	 				<HBox>
+						<Label required="true" text="End Date:" class="gridLblClass" />
+						<DatePicker id="idEndDate" value="{/ProjectDetails/ProjectEndDate}" valueFormat="yyyy-MM-dd"
+						 	change="onEndDateChange" valueState="{/ProjectDetails/ProjectEndDateValState}"/>
+						<layoutData>
+							<l:GridData span="L6 M6 S12" />
+						</layoutData>
+	 				</HBox>
+<!-- 	 				<HBox> -->
+<!-- 	 					<Label text="Project Location:" class="gridLblClass" /> -->
+<!-- 	 					<Input enabled="false" /> -->
+<!-- 	 					<layoutData> -->
+<!-- 							<l:GridData span="L4 M6 S12" /> -->
+<!-- 						</layoutData> -->
+<!-- 	 				</HBox> -->
+	 				<HBox>
+	 					<Label required="true" text="{i18n>UploadRls}" class="gridLblClass" />
+						<u:FileUploader	id="idRlsUploader" value="{/ProjectDetails/RlsUploader}" width="100%" name="UI5FileUploaderComp"
+							tooltip="Upload your file" change="onValueChange" sameFilenameAllowed="true"
+							uploadComplete="onUploadCompleted" valueState="{/ProjectDetails/RlsUploaderValState}"
+							typeMissmatch="handleTypeMissmatch"	style="Emphasized" fileType="xlsx"
+							placeholder="Choose a file for Upload...">
+						</u:FileUploader>
+						<layoutData>
+							<l:GridData span="L6 M12 S12" />
+						</layoutData>
+	 				</HBox>
+	 				<HBox class="hBoxMargin" justifyContent="End">
+	 					<Button text="Upload" press="onUpload" type="" class="sapUiSmallMarginEnd" />
+	 					<Button text="Clear" press="onClear" type="Reject" />
+						<layoutData>
+							<l:GridData span="L6 M12 S12" />
+						</layoutData>
+	 				</HBox>
+				</l:Grid>
+				</VBox>
+				
+				<VBox class="salesReportHdrBoxClass" visible="{=${RLSModel>/}.length ? true : false}">
+					<t:Table id="idPlanResourceTbl"  class="pMTableClass" fixedColumnCount="3" enableColumnReordering="false"
+						rows="{RLSModel>/}" 
+						selectionMode="None"
+						group="subGrade"
+						sort="subGrade"
+						visibleRowCount="8" >
+						<t:toolbar>
+							<Toolbar>
+								<Title text="{i18n>PlanResourcesTitle}" level="H3" titleStyle="H3" />
+								<ToolbarSpacer />
+								<Button text="Submit &amp; Search" press="onSearch" type="Emphasized" visible="{=${RLSModel>/}.length ? true : false}" />
+							</Toolbar>
+						</t:toolbar>
+					</t:Table>
+				</VBox>
+				
+		</content>
+	</Page>
+</core:View>

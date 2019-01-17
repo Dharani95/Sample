@@ -1,0 +1,211 @@
+{
+	"_version": "1.0.0",
+	"sap.app": {
+		"_version": "1.0.0",
+		"id": "idSplitApp",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDesc}}"
+	},
+	"sap.ui": {
+		"_version": "1.0.0",
+		"technology": "ui5",
+		"deviceTypes": { 
+            "desktop": "true", 
+            "tablet": "true", 
+            "phone": "true" 
+        }
+	},
+	"sap.ui5": {
+		"_version": "1.0.0",
+		"rootView": "com.incture.view.App",
+		"dependencies": {
+			"minUI5Version": "1.30",
+			"libs": {
+				"sap.m": {
+				},
+				"sap.tnt": {},
+				"sap.ui.unified": {}
+			}
+		},
+		 "resources":{ 
+            "css": [{
+                "uri": "./css/Style.css"
+            },
+            {
+                "uri": "./css/font-awesome.css"
+            }
+            ],
+            "js":[{
+            	"uri": "./util/formatter.js"
+            }]
+            
+        },
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/init_data.json"
+			},
+			"RLSModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"RLSDisplayModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"ResourceMatched": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"NamedResource": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"EmpSuggestion": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"BPMProcessModel": {
+				"type": "sap.ui.model.odata.ODataModel",
+				"uri": "/bpmodata/startprocess.svc/oneapp.incture.com/cw_tscm~bpmres/RES_APPR_PROCESS"
+			},
+			"BPMProcessModelCRF": {
+				"type": "sap.ui.model.odata.ODataModel",
+				"uri": "/bpmodata/startprocess.svc/oneapp.incture.com/cw_tscm~cw_tscm~crf~bpm/CRF_APPR_PRC"
+			},
+			"ApprovalModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"ApprovalModelList": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"oRMTableResults" : {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"SidePanelModel" : {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"oCommentsModel" : {
+			"type": "sap.ui.model.json.JSONModel"
+			},
+			"oModelCopy" : {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"oFlagModel" : {
+				"type": "sap.ui.model.json.JSONModel"
+			}
+			
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "com.incture.view",
+				"controlId": "idSplitApp",
+				"controlAggregation": "detailPages",
+				"clearControlAggregation": "false"
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "master",
+					"target": [
+						"master",
+						"details"
+						
+					]
+				},
+				{
+					"pattern": "details/{data}",
+					"name": "details",
+					"target": [
+						"master",
+						"details"
+					]
+				},
+				{
+					"pattern": "Inbox",
+					"name": "Inbox",
+					"target": [
+						"inbox",
+						"master"
+					]
+				},
+				{
+					"pattern": "updateResMgmtTable",
+					"name": "updateResMgmtTable",
+					"target": [
+						"master",
+						"updateResMgmtTable"
+					]
+				},
+				{
+					"pattern": "PMEntry",
+					"name": "assignResources",
+					"target": [
+						"pmEntry",
+						"master"
+					]
+				},
+				{
+					"pattern": "matchedResources",
+					"name": "matchedRsrc",
+					"target": [
+						"master",
+						"pmEntry",
+						"matchedResource"
+					]
+				},
+				{
+					"pattern": "ChangeRequestForm",
+					"name": "ChangeRequestForm",
+					"target": [
+						"CRF",
+						"master"
+					]
+				}
+				
+			],
+			
+			"targets": {
+				"master" : {
+					"viewName":"Master",
+					"controlAggregation": "masterPages"
+				},
+				"details": {
+					"viewName": "Details",
+					"controlAggregation": "detailPages"
+				},
+				"inbox": {
+					"viewName": "inbox",
+					"controlAggregation": "detailPages"
+				},
+				"updateResMgmtTable": {
+					"viewName": "UpdateResMgmtTable",
+					"controlAggregation": "detailPages"
+				},
+				"CRF" : {
+					"viewName": "CRF",
+					"controlAggregation": "detailPages"
+				},
+				"pmEntry": {
+					"viewName": "PMEntry",
+					"viewId": "pmEntry",
+					"viewLevel": 2
+				},
+				"matchedResource": {
+					"viewName": "matchedResources",
+					"viewId": "matResource",
+					"viewLevel": 2
+				},
+				"approval": {
+					"viewName": "Approval",
+					"viewId": "approval"
+				}
+			}
+		}
+	}
+}

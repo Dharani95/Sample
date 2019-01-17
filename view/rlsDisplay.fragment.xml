@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:t="sap.ui.table" xmlns:core="sap.ui.core">
+	<Dialog title="RLS Requested" stretch="false"
+		contentWidth="90%" class="sapUiSizeCompact" >
+		
+		<customHeader>
+		<Bar>
+		<contentRight>
+		<Button icon="sap-icon://sys-cancel-2" press="onClose" />
+		</contentRight>
+		</Bar>
+		</customHeader> 
+				<VBox class="salesReportHdrBoxClass">
+			<t:Table id="idPlanResourceTbl"  class="pMTableClass" fixedColumnCount="3" enableColumnReordering="false"
+						rows="{RLSDisplayModel>/}" 
+						selectionMode="None"
+						group="subGrade"
+						sort="subGrade"
+						visibleRowCount="8" >
+						<t:toolbar>
+							<Toolbar>
+								<Title text="{i18n>PlanResourcesTitle}" level="H3" titleStyle="H3" />
+								<ToolbarSpacer />
+<!-- 								<Button icon="sap-icon://decline" press="onClose" /> -->
+<!-- 								<Button text="Submit &amp; Search" press="onSearch" type="Emphasized" visible="{=${RLSModel>/}.length ? true : false}" /> -->
+							</Toolbar>
+						</t:toolbar>
+					</t:Table>		
+					</VBox>
+	</Dialog>
+</core:FragmentDefinition>
