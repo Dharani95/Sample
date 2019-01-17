@@ -13,7 +13,7 @@ sap.ui.define([
 	*/
 		onInit: function() {
 			var that = this;
-			//Dharani
+			//Sowndharya
 			var oView = this.getView();
 			var oComponent = this.getOwnerComponent();
 			this._router = oComponent.getRouter();
